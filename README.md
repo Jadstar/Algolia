@@ -1,0 +1,2 @@
+# Algolia
+Created with CodeSandbox
