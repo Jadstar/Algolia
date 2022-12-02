@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="theme-color" content="#000000" />
+    <title>Algolia InstantSearch | E-commerce demo</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.7.1/dist/instantsearch.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="src/app.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/instantsearch.css@7/themes/algolia-min.css"
+    />
+    <style>
+      /**
+        [class^=ais-] {
+            letter-spacing: .15rem; 
+        }
+        **/
+      /* [class^=ais-] {
+            letter-spacing: .05em; 
+        } */
+      .ais-Hits-list,
+      .ais-InfiniteHits-list,
+      .ais-InfiniteResults-list,
+      .ais-Results-list {
+        margin-right: -0.75rem;
+        margin-left: -0.75rem;
+      }
+      .ais-SearchBox {
+        margin-right: 1em;
+        border: none;
+        padding: 0;
+      }
+      .ais-SearchBox-input {
+        background-color: transparent;
+        /**
+            border-bottom-left-radius: 6px;
+            border-top-left-radius: 6px;
+            border: 1px solid #707070;
+            float: left;
+            **/
+        color: #fff;
+        display: inline;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin: 5px 0;
+        padding: 10px;
+        width: 100%;
+      }
+      .ais-SearchBox-input::placeholder {
+        color: #fff;
+      }
+      .ais-SearchBox-submit {
+        color: #fff;
+        display: inline;
+        right: 0.3rem !important;
+      }
+      .ais-side-bar-panel__title {
+        color: #fff;
+        background-color: #000;
+      }
+      .ais-side-bar-panel {
+        background-color: #fff;
+        color: #000;
+        border: 1px solid #000;
+      }
+      .ais-RefinementList-label {
+        color: #000;
+      }
+      .ais-RefinementList-labelText {
+        font-size: 0.85em;
+        color: #000;
+      }
+      .ais-RangeSlider {
+        margin-left: 1em;
+        margin-right: 1em;
+      }
+      .ais-RangeSlider .rheostat-tooltip {
+        color: #000;
+      }
+      .ais-RangeSlider .rheostat-progress {
+        background-color: #333;
+      }
+      .ais-ClearRefinements-button {
+        background: transparent;
+        border-radius: 30px;
+        font-family: como, sans-serif;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #000;
+        border-color: #000;
+        line-height: 1.42857;
+        padding: 0.25rem 1rem;
+        border: 1px solid #000;
+        color: #000;
+      }
+      .ais-ClearRefinements-button:hover {
+        background-color: #000;
+        color: #fff;
+      }
+      .ais-Hits-item {
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        border: none;
+        margin-bottom: 1em;
+        width: 33.3333333333%;
+        box-shadow: none;
+      }
+      .ais-Pagination {
+        color: #000;
+      }
+      .ais-Pagination-item--disabled {
+        color: #000;
+      }
+      .ais-Pagination-link {
+        color: #000;
+      }
+      .ais-Pagination-item--selected .ais-Pagination-link {
+        background-color: #000;
+        border-color: #000;
+      }
+      .ais-noresults {
+        border-color: #000;
+        font-size: 1em;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .ais-price-retail {
+        color: #000;
+      }
+      .ais-prod-thumb {
+        object-fit: scale-down;
+      }
+      .ais-prod-thumb-title {
+        height: 120px;
+        padding-top: 5px;
+      }
+      .ais-prod-thumb-matchheight {
+        height: 300px;
+      }
+      .ais-prod-thumb-wrapper {
+        height: 600px;
+      }
+      @media screen and (max-width: 1400px) {
+        .ais-prod-thumb-wrapper {
+          height: 640px;
+        }
+        .ais-prod-thumb-title {
+          height: 140px;
+        }
+      }
+      @media screen and (max-width: 990px) {
+        .ais-Hits-item {
+          width: calc(50% - 1em);
+        }
+        .ais-hits-wrapper {
+          width: 100%;
+        }
+        .ais-prod-thumb-title {
+          height: 120px;
+        }
+        .ais-prod-thumb-matchheight {
+          height: 400px;
+        }
+        .ais-prod-thumb-wrapper {
+          height: 760px;
+        }
+      }
+      /*
+        @media screen and (max-width: 420px) {
+            .ais-prod-thumb-title {
+                height: 250px;
+            }
+        }
+*/
+      @media screen and (max-width: 760px) {
+        .ais-prod-thumb-title {
+          height: 210px;
+        }
+      }
+      @media screen and (max-width: 320px) {
+        .ais-Hits-item {
+          width: calc(100% - 1em);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <main class="search-container">
+      <div class="left-panel">
+        <div id="categories"></div>
+        <div id="brands"></div>
+        <div id="price"></div>
+      </div>
+      <div class="right-panel">
+        <div id="searchbox"></div>
+        <div id="stats"></div>
+        <div id="hits" class="thumb"></div>
+        <div id="pagination"></div>
+      </div>
+    </main>
+    <footer>
+      Source Code on
+      <a href="https://github.com/algolia/doc-onboarding">GitHub</a> | Powered
+      by
+      <a href="https://www.algolia.com">Algolia</a>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.8.0/dist/instantsearch.min.js"></script>
+    <script src="src/app.js"></script>
+  </body>
+</html>
